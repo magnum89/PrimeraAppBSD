@@ -23,6 +23,8 @@ public class MainActivity extends ActionBarActivity {
     //llamamos a la clase de sharedpreferences
     private SharedPreferences opciones;
 
+    private SharedPreferences.OnSharedPreferenceChangeListener oyente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,16 @@ public class MainActivity extends ActionBarActivity {
 
         opciones = PreferenceManager.getDefaultSharedPreferences(this);//me estara retornando un objeto de mis preferencias a mi actividad
 
+        oyente = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+                MainActivity.this.RefrescarPantalla(null);
+
+            }
+        };
+
+        opciones.registerOnSharedPreferenceChangeListener(oyente);
 
     }
 
