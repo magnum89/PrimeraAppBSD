@@ -1,5 +1,9 @@
 package com.ingtech.primeraappbsd;
+
+
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +17,8 @@ import Utilidades.AyudaIU;
 public class MainActivity extends ActionBarActivity {
 
     public static final String LOGTAG="TourSc";//clave
-    public static final String NOMBREUSUARIO="nombreusuario";//mayus hace referencia a la preferencia compartida en java, y la minus es la preferencia
-    //en el disco
+    public static final String NOMBREUSUARIO="pref_nombreusuario";
+    public static final String VERIMAGENES="pref_verimagenes";
 
     //llamamos a la clase de sharedpreferences
     private SharedPreferences opciones;
@@ -24,8 +28,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        opciones = getPreferences(MODE_PRIVATE);//getshareprefences es para usarla en toda la aplicacion
-        //getprefences es solo aca en la actividad
+        opciones = PreferenceManager.getDefaultSharedPreferences(this);//me estara retornando un objeto de mis preferencias a mi actividad
 
 
     }
@@ -33,14 +36,8 @@ public class MainActivity extends ActionBarActivity {
     public void AceptarPref(View v) {
         Log.i(LOGTAG, "Boton de aceptar clicado");
 
-        SharedPreferences.Editor editor = opciones.edit();//editor de los objetos de las preferencias compartidas
-        //hara es retornar una referencia al editor para que trabaje con la actividad de estre momento
-        String ValorString = AyudaIU.getText(this,R.id.editText01);
-        editor.putString(NOMBREUSUARIO,ValorString);//valor tengo los estring q ingrese el usuario
-        editor.commit();//todos los valores seran guardados en memoria
-
-        //mostrar los cambios
-        AyudaIU.displayText(this,R.id.textView01,"Preferencias Guardadas");//hace referencia a lo que queremos mostrar
+        Intent intento = new Intent(this, OpcionesDeActividad.class);
+        startActivity(intento);//ejecutar la actividad
 
     }
 
@@ -50,6 +47,7 @@ public class MainActivity extends ActionBarActivity {
 
         String ValorString = opciones.getString(NOMBREUSUARIO,"No Encontrado");
         AyudaIU.displayText(this,R.id.textView01,ValorString);//mostrar el texto q ha sido guardado
+        AyudaIU.setCBChecked(this,R.id.checkBox01,opciones.getBoolean(VERIMAGENES,false));
 
     }
 

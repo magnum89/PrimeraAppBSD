@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Opciones Generales">
+
+        <EditTextPreference
+            android:title="Nombre de Usuario"
+            android:key="pref_nombreusuario"/>
+
+        <CheckBoxPreference
+            android:title="Ver Imagenes"
+            android:key="pref_verimagenes"
+            android:summary="Determinar si los tours son vistos con imagenes"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
