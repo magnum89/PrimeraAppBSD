@@ -10,6 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -76,40 +80,83 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void CrearArchivo (View v) throws IOException {//genera exepciones
-        //primero acceso a lo que el usuario esta ingresando por teclado
-        String texto = AyudaIU.getText(this,R.id.editText1);
-        //grabarlas internamente en el dispositivo
-        FileOutputStream FoS = openFileOutput("Miarchivo.txt",MODE_PRIVATE);//nombre - modo
-        //crear el archivo enviamos un buffer
+    public void CrearArchivo (View v) throws IOException, JSONException {
+
+        //crear un array JSON
+        JSONArray data = new JSONArray();//inicializado
+
+        JSONObject tour;
+
+        tour = new JSONObject();
+        //ingresar data al tour
+        tour.put("Tour", "Margarita");//nombre y valor
+        tour.put("Precio", 1900);//tenemos el objeto
+        //agregar el jsonObjec en el JsonArray
+        data.put(tour);
+
+        tour = new JSONObject();
+        //ingresar data al tour
+        tour.put("Tour", "Roques");//nombre y valor
+        tour.put("Precio", 2500);//tenemos el objeto
+        //agregar el jsonObjec en el JsonArray
+        data.put(tour);
+
+        tour = new JSONObject();
+        //ingresar data al tour
+        tour.put("Tour", "La Sabana");//nombre y valor
+        tour.put("Precio", 1600);//tenemos el objeto
+        //agregar el jsonObjec en el JsonArray
+        data.put(tour);
+
+        //mostrar la data al usuario
+        String texto = data.toString();//mostrara lo que tiene el jsonarray
+
+
+        FileOutputStream FoS = openFileOutput("TourSc",MODE_PRIVATE);
+
         FoS.write(texto.getBytes());
-        //cerrar FileOutp
+
         FoS.close();
-        //mostrar que el archivo fue creado correctamente
-        AyudaIU.displayText(this,R.id.textView1,"El archivo fue creado correctamente");
+
+        AyudaIU.displayText(this,R.id.textView1,"Archivo Creado:\n " + data.toString());//retornando la informacion que tiene el array
 
     }
 
-    public void LeerArchivo (View v) throws IOException {
-        //leer el archivo
-        FileInputStream FiS = openFileInput("Miarchivo.txt");
-        //crear el buffer
+    public void LeerArchivo (View v) throws IOException, JSONException {
+
+        FileInputStream FiS = openFileInput("TourSc");
+
         BufferedInputStream EntradaBuffer = new BufferedInputStream(FiS);
-        //String buffer
-        StringBuffer SB = new StringBuffer();//lee un caracter a la vez
 
-        while (EntradaBuffer.available()!=0){//condicional que este mirando el buffer q si sea diferente de cero
+        StringBuffer SB = new StringBuffer();
 
-            char Caracter = (char)EntradaBuffer.read();//retorna un caracter a la vez y esta grabando en Caracter
-            //para mostrar toda los caracteres a la vez
+        while (EntradaBuffer.available() != 0) {
+
+            char Caracter = (char) EntradaBuffer.read();
             SB.append(Caracter);
 
         }
-        //actualizar al usuario y mostrar lo que esta guardado
-        AyudaIU.displayText(this,R.id.textView1,SB.toString());//de esta forma le muestro al usuario lo grabado
-        //cerrar entradabuffer
+
+
         EntradaBuffer.close();
         FiS.close();
+
+        //deserealizado - desordenado
+
+        JSONArray data = new JSONArray(SB.toString());//le pasamos SB
+        StringBuffer TourBuffer = new StringBuffer();
+
+
+        //tomar la informacion y mostrarla al usuario de forma amigable
+        for (int i = 0; i < data.length(); i++){
+
+            String tour = data.getJSONObject(i).getString("Tour");//buscando en todos mis objetos y me retorne con referencia tours
+            //unir toda la info en un string
+            TourBuffer.append(tour + "\n ");
+
+        }
+
+        AyudaIU.displayText(this, R.id.textView1, TourBuffer.toString());//mostrar
 
     }
 
@@ -136,4 +183,3 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
