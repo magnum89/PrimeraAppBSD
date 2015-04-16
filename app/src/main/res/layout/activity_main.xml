@@ -4,35 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/textView1"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="44dp"
-        android:onClick="CrearArchivo"
-        android:text="Crear Archivo" />
+        android:layout_alignParentTop="true" >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_marginLeft="26dp"
-        android:layout_toRightOf="@+id/button1"
-        android:onClick="LeerArchivo"
-        android:text="Leer Archivo" />
+    </ListView>
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="5dp"
-        android:layout_marginLeft="37dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
 
 </RelativeLayout>

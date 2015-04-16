@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tours>
+  <tour>
+    <tourId>14</tourId>
+    <tituloTour>Merida - Valle de la Culata</tituloTour>
+    <tituloPaquete>Viaje por merida</tituloPaquete>
+    <Descripcion>Desayuno en el Hotel o Posada. Por la manana visitaremos el Valle de La Culata en un maravilloso lugar entre la neblina y los paisajes de paramo, visita a la Truchicultura Valle Rey y Artesanias El Trompo. Cena en Restaurante la Abadia.</Descripcion>
+    <precio>350</precio>
+    <dificultad>2</dificultad>
+    <length>2</length>
+    <imagen>map_merida</imagen>
+    <link>http://www.TourSc.org/tour.php?id=14</link>
+  </tour>
+  <tour>
+    <tourId>26</tourId>
+    <tituloTour>Puerto Ordaz</tituloTour>
+    <tituloPaquete>Tour por puerto ordaz</tituloPaquete>
+    <Descripcion>Salimos temprano desde Puerto Ordaz donde visitaremos el Parque Cachamay. Contin�a el viaje pasando por las poblaciones de Upata, Guasipati, El Callao, Tumeremo. Almorzaremos en un restaurante t�pico criollo. Seguimos por las poblaciones de Km. 88, en la Piedra de la Virgen nos detendremos para observar este monumento natural.  A partir de aqu� ascenderemos hasta los 1.400 mts para finalmente llegar a la Gran Sabana.</Descripcion>
+    <precio>850</precio>
+    <dificultad>Easy</dificultad>
+    <length>5</length>
+    <imagen>map_pordaz</imagen>
+    <link>http://www.TourSc.org/tour.php?id=26</link>
+  </tour>
+  <tour>
+    <tourId>11</tourId>
+    <tituloTour>La gran sabada</tituloTour>
+    <tituloPaquete>Visitando los tepuyes</tituloPaquete>
+    <Descripcion>Despu�s del desayuno, salimos hasta Santa Elena de Uair�n, parando ocasionalmente visitando lugares de inter�s como el Salto El Kavvi, Salto Kama Meru, Mirador el Oso, en donde tendr� la oportunidad de tomarle fotos a los tepuyes, Quebrada Arapan, Quebrada Soroape, Salto Yuruani, almuerzo en San Francisco de Yuruani, seguimos Quebrada El Jaspe, visita a La L�nea de Brasil. Pernocta en Sta. Elena en el campamento Yakoo</Descripcion>
+    <precio>6000</precio>
+    <dificultad>Difficult</dificultad>
+    <length>14</length>
+    <imagen>map_gransabana</imagen>
+    <link>http://www.TourSc.org/tour.php?id=11</link>
+  </tour>
+  <tour>
+    <tourId>9</tourId>
+    <tituloTour>Visitando Boca E' Monte</tituloTour>
+    <tituloPaquete>El Quino � Boca E' Monte</tituloPaquete>
+    <Descripcion>Bosque nublado y p�ramos andinos (1600 m a 2.300m) Se suceden las bajadas y las subidas por una cresta que permite disfrutar de hermosos y amplios paisajes, de la selva nublada y sus vistosas plantas ep�fitas, como bromelias y orqu�deas. Estamos en medio de uno de los m�s atractivos ecosistemas, donde converge la t�pica vegetaci�n del bosque nublado y de los imponentes p�ramos, con ecotonos muy preservados. Desde all�, se tiene una espectacular vista de la Sierra Nevada y del piedemonte llanero. Llegada al refugio Boca E' monte en donde pasaremos la noche.</Descripcion>
+    <precio>1000</precio>
+    <dificultad>Easy</dificultad>
+    <length>3</length>
+    <imagen>map_bocamonte</imagen>
+    <link>http://www.TourSc.org/tour.php?id=9</link>
+  </tour>
+  <tour>
+    <tourId>1</tourId>
+    <tituloTour>Gran viaje a Palo Quemao</tituloTour>
+    <tituloPaquete>Palo Quemao - El Quino </tituloPaquete>
+    <Descripcion>Desayuno y traslado a Barinas donde nuestro gu�a nos estar� esperando, para conducirnos a trav�s de 92 km de carretera que separa Barinas con la comunidad de Palo Quemao, punto de partida de nuestra aventura. Al llegar a la Mucuposada Vista Hermosa tomaremos nuestro almuerzo. En la tarde visitaremos y conoceremos la vida de la Finca. Cena y Alojamiento en la Mucuposada Vista Hermosa.</Descripcion>
+    <precio>750</precio>
+    <dificultad>Medium</dificultad>
+    <length>3</length>
+    <imagen>map_paloquemao</imagen>
+    <link>http://www.TourSc.org/tour.php?id=1</link>
+  </tour>
+  
+</tours>
