@@ -2,6 +2,7 @@ package com.ingtech.primeraappbsd;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,6 +36,10 @@ public class MainActivity extends ActionBarActivity {
 
     private SharedPreferences.OnSharedPreferenceChangeListener oyente;
 
+    private File archivo;
+    private static final String NOMBREARCHIVO = "datadejson";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +59,12 @@ public class MainActivity extends ActionBarActivity {
         opciones.registerOnSharedPreferenceChangeListener(oyente);
 
 
-        File archivo = getFilesDir();//se refiere a la direccion de los archivos
-
-        String camino = archivo.getAbsolutePath();//retornara en donde tiene mi dispositvo la direccion en donde se guarda los archivos
-
-        //mostrar lo que obtuve en el camino
+        File direcexterno = getExternalFilesDir(null);
+        String camino = direcexterno.getAbsolutePath();
         AyudaIU.displayText(this,R.id.textView1, camino);
+
+        archivo = new File(direcexterno,NOMBREARCHIVO);//enviar file q sera directorio externo y el nombre del archivo
+
     }
 
     public void AceptarPref(View v) {
@@ -108,23 +113,23 @@ public class MainActivity extends ActionBarActivity {
         //agregar el jsonObjec en el JsonArray
         data.put(tour);
 
-        //mostrar la data al usuario
-        String texto = data.toString();//mostrara lo que tiene el jsonarray
+
+        String texto = data.toString();
 
 
-        FileOutputStream FoS = openFileOutput("TourSc",MODE_PRIVATE);
+        FileOutputStream FoS = new FileOutputStream(archivo);//ahora esta creando el archivo de forma externa
 
         FoS.write(texto.getBytes());
 
         FoS.close();
 
-        AyudaIU.displayText(this,R.id.textView1,"Archivo Creado:\n " + data.toString());//retornando la informacion que tiene el array
+        AyudaIU.displayText(this,R.id.textView1,"Archivo Creado:\n " + data.toString());
 
     }
 
     public void LeerArchivo (View v) throws IOException, JSONException {
 
-        FileInputStream FiS = openFileInput("TourSc");
+        FileInputStream FiS = new FileInputStream(archivo);//apunta al almacenamiento externo
 
         BufferedInputStream EntradaBuffer = new BufferedInputStream(FiS);
 
@@ -182,4 +187,27 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //crear un metodo para vereficar si nuestra aplicacion de acceder a los archivos externos
+    public boolean ChekiarAlmacenamientoExterno(){
+        String estado = Environment.getExternalStorageState();
+
+        //en un condicional si el estado nos permite acceder o no
+        if (estado.equals(Environment.MEDIA_MOUNTED)){// si tiene acceso
+
+            return true;
+
+        }else if(estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {//si solo es lectura
+
+            //mostraremos al usuario lo que esta sucediendo
+            AyudaIU.displayText(this,R.id.textView1,"Almacenamiento Externo es de solo lectura");
+
+        }else{
+            //no tenga acceso a la data
+            AyudaIU.displayText(this,R.id.textView1,"Almacenamiento Externo no esta disponible");
+
+        }
+        return false;
+    }
 }
+
