@@ -71,7 +71,9 @@ public class MainActivity extends ListActivity {
         archivo = new File(direcexterno,NOMBREARCHIVO);//enviar file q sera directorio externo y el nombre del archivo
 
         //usamos el metodo
-        ToursPullParser parser = new ToursPullParser();
+        //ToursPullParser parser = new ToursPullParser();
+        ToursJDOMParser parser = new ToursJDOMParser();//solo esto agregando la libreria nueva
+
         List<Tour> tours = parser.parseXML(this);//lista tendra como tipo de data la clase tours tendra como contexto tendra la referencia xml
         //creamos un array adapter y pasamos como tipo de dato tour
         ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this,android.R.layout.simple_list_item_1,tours);
