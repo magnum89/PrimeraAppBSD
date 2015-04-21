@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 
 import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
 import com.ingtech.primeraappbsd.database.PrimeraOpenHelper;
+import com.ingtech.primeraappbsd.database.ToursDataSource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,9 +48,10 @@ public class MainActivity extends ListActivity {
     private File archivo;
     private static final String NOMBREARCHIVO = "datadejson";
 
-
-    SQLiteOpenHelper ayudaDb;
-    SQLiteDatabase baseDatos;
+        //borramos esto para poner
+    //SQLiteOpenHelper ayudaDb;
+    //SQLiteDatabase baseDatos;
+    ToursDataSource DataSource;
 
 
     @Override
@@ -83,9 +85,10 @@ public class MainActivity extends ListActivity {
 
         List<Tour> tours = parser.parseXML(this);//lista tendra como tipo de data la clase tours tendra como contexto tendra la referencia xml
 
+        //ayudaDb = new PrimeraOpenHelper(this);
+        //baseDatos = ayudaDb.getWritableDatabase();
 
-        ayudaDb = new PrimeraOpenHelper(this);
-        baseDatos = ayudaDb.getWritableDatabase();
+        DataSource = new ToursDataSource(this);
 
 
         //creamos un array adapter y pasamos como tipo de dato tour
@@ -235,6 +238,21 @@ public class MainActivity extends ListActivity {
 
         }
         return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DataSource.abrir();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        DataSource.cerrar();
     }
 }
 
