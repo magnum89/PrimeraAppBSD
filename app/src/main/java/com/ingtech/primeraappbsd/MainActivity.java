@@ -3,6 +3,8 @@ package com.ingtech.primeraappbsd;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
+import com.ingtech.primeraappbsd.database.PrimeraOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +46,10 @@ public class MainActivity extends ListActivity {
 
     private File archivo;
     private static final String NOMBREARCHIVO = "datadejson";
+
+
+    SQLiteOpenHelper ayudaDb;
+    SQLiteDatabase baseDatos;
 
 
     @Override
@@ -75,6 +82,12 @@ public class MainActivity extends ListActivity {
         ToursJDOMParser parser = new ToursJDOMParser();//solo esto agregando la libreria nueva
 
         List<Tour> tours = parser.parseXML(this);//lista tendra como tipo de data la clase tours tendra como contexto tendra la referencia xml
+
+
+        ayudaDb = new PrimeraOpenHelper(this);
+        baseDatos = ayudaDb.getWritableDatabase();
+
+
         //creamos un array adapter y pasamos como tipo de dato tour
         ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this,android.R.layout.simple_list_item_1,tours);
         setListAdapter(adapter);
