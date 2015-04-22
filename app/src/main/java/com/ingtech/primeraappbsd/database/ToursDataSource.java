@@ -1,9 +1,12 @@
 package com.ingtech.primeraappbsd.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
 
 public class ToursDataSource {
 
@@ -31,4 +34,21 @@ public class ToursDataSource {
         Log.i(LOGTAG,"Base de datos cerrada");
         ayudaDb.close();
     }
+
+    public Tour crear (Tour tour){
+
+        ContentValues valores = new ContentValues();
+
+        valores.put(PrimeraOpenHelper.COLUMNA_TITULO, tour.getTitulo());
+        valores.put(PrimeraOpenHelper.COLUMNA_DESC, tour.getDescripcion());
+        valores.put(PrimeraOpenHelper.COLUMNA_PRECIO, tour.getPrecio());
+        valores.put(PrimeraOpenHelper.COLUMNA_IMAGEN, tour.getImagen());
+
+        long idInsertado = baseDatos.insert(PrimeraOpenHelper.TABLA_TOURS,null,valores);
+        tour.setId(idInsertado);
+
+        return tour;
+
+    }
+
 }

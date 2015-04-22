@@ -90,8 +90,8 @@ public class MainActivity extends ListActivity {
        //baseDatos = ayudaDb.getWritableDatabase();
 
         DataSource = new ToursDataSource(this);
-        //DataSource.abrir();
-        //CrearDatos();
+        DataSource.abrir();//aseguramos que esta abierta
+        CrearDatos();
 
 
         //creamos un array adapter y pasamos como tipo de dato tour
@@ -258,6 +258,34 @@ public class MainActivity extends ListActivity {
         DataSource.cerrar();
     }
 
+    private void CrearDatos(){
+
+        Tour tour = new Tour();
+
+        tour.setTitulo("Ciudad de Neiva");
+        tour.setDescripcion("Tour a la ciudad de Neiva");
+        tour.setPrecio(5000);
+        tour.setImagen("ciudad_neiva");
+        tour = DataSource.crear(tour);
+        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
+
+        tour.setTitulo("Ciudad de Bogota");
+        tour.setDescripcion("Tour a la ciudad de Bogota");
+        tour.setPrecio(20000);
+        tour.setImagen("ciudad_bogota");
+        tour = DataSource.crear(tour);
+        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
+
+        tour.setTitulo("Ciudad de Pitalito");
+        tour.setDescripcion("Tour a la ciudad de Pitalito");
+        tour.setPrecio(15000);
+        tour.setImagen("ciudad_pitalito");
+        tour = DataSource.crear(tour);
+        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
+
+
+
+    }
 
 }
 

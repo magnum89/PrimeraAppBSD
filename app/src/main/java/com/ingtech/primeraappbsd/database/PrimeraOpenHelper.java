@@ -15,9 +15,9 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     private static final String LOGTAG = "TOURSC";
 
     private static final String DATABASE_NAME = "tours.db";
-    private static final int DATABASE_VERSION = 2;//y aca
+    private static final int DATABASE_VERSION = 3;
 
-    public static final String TABLA_TOURS= "tours";//el error esta aca
+    public static final String TABLA_TOURS= "tours";
     public static final String COLUMNA_ID = "tourId";
     public static final String COLUMNA_TITULO = "titulo";
     public static final String COLUMNA_DESC = "descripcion";
@@ -41,14 +41,11 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //Log.i(LOGTAG, "antes del try");
-        //try {
+
             Log.i(LOGTAG, "antes de crear");
             db.execSQL(CREAR_TABLA);
             Log.i(LOGTAG, "La tabla se creo");
-        //}catch (Exception e){
-          // e.printStackTrace();
-        //}
+
 
     }
 
