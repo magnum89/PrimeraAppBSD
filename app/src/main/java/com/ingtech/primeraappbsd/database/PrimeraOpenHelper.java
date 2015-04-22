@@ -25,7 +25,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     public static final String COLUMNA_IMAGEN = "imagen";
 
     private static final String CREAR_TABLA =
-            "CREAR TABLA" + TABLA_TOURS + " (" +
+            "CREATE TABLE " + TABLA_TOURS + " (" +
                     COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMNA_TITULO + " TEXT, " +
                     COLUMNA_DESC + " TEXT, " +
@@ -33,7 +33,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
                     COLUMNA_PRECIO + " NUMERIC " +
                     ")";
 
-    //String name, SQLiteDatabase.CursorFactory factory, int version
+
 
     public PrimeraOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,13 +41,13 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i(LOGTAG, "antes del try");
+        //Log.i(LOGTAG, "antes del try");
         //try {
             Log.i(LOGTAG, "antes de crear");
             db.execSQL(CREAR_TABLA);
             Log.i(LOGTAG, "La tabla se creo");
         //}catch (Exception e){
-         //   e.printStackTrace();
+          // e.printStackTrace();
         //}
 
     }

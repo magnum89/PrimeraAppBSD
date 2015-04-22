@@ -3,16 +3,16 @@ package com.ingtech.primeraappbsd.buscadortour.modelo;
 import java.text.NumberFormat;
 
 public class Tour {
-	private int id;
+	private long id;
 	private String titulo;
 	private String descripcion;
 	private double precio;
 	private String imagen;
 	
-	public int getId() {
+	public long getId() {//por el id long
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getTitulo() {
