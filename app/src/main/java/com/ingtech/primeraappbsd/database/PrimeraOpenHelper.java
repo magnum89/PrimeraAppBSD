@@ -15,7 +15,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     private static final String LOGTAG = "TOURSC";
 
     private static final String DATABASE_NAME = "tours.db";
-    private static final int DATABASE_VERSION = 1;//y aca
+    private static final int DATABASE_VERSION = 2;//y aca
 
     public static final String TABLA_TOURS= "tours";//el error esta aca
     public static final String COLUMNA_ID = "tourId";
@@ -24,7 +24,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     public static final String COLUMNA_PRECIO = "precio";
     public static final String COLUMNA_IMAGEN = "imagen";
 
-    private static final String CREAR_TABLA =
+    private static final String CREAR_TABLA =//"CREATE TABLE " uno de los errores mas frecuentes
             "CREATE TABLE " + TABLA_TOURS + " (" +
                     COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMNA_TITULO + " TEXT, " +
@@ -55,7 +55,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i(LOGTAG,"dentro de onUpgrade");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TOURS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_TOURS);//cosas q hay q revisar bien "DROP TABLE IF EXISTS "
         Log.i(LOGTAG,"despues de drop");
         onCreate(db);
         Log.i(LOGTAG,"borrado");
