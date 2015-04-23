@@ -49,9 +49,7 @@ public class MainActivity extends ListActivity {
     private File archivo;
     private static final String NOMBREARCHIVO = "datadejson";
 
-        //borramos esto para poner
-    //SQLiteOpenHelper ayudaDb;
-    //SQLiteDatabase baseDatos;
+
     ToursDataSource DataSource;
 
 
@@ -82,16 +80,18 @@ public class MainActivity extends ListActivity {
 
         //usamos el metodo
         //ToursPullParser parser = new ToursPullParser();
-        ToursJDOMParser parser = new ToursJDOMParser();//solo esto agregando la libreria nueva
-
-        List<Tour> tours = parser.parseXML(this);//lista tendra como tipo de data la clase tours tendra como contexto tendra la referencia xml
-
-       //ayudaDb = new PrimeraOpenHelper(this);
-       //baseDatos = ayudaDb.getWritableDatabase();
+        //ToursJDOMParser parser = new ToursJDOMParser();//solo esto agregando la libreria nueva
 
         DataSource = new ToursDataSource(this);
         DataSource.abrir();//aseguramos que esta abierta
-        CrearDatos();
+
+        List<Tour> tours = DataSource.encontrarTodos();
+
+        if(tours.size() == 0 )//significa q no tengo ninguna base de datos
+        {
+            CrearDatos();
+            tours = DataSource.encontrarTodos();
+        }
 
 
         //creamos un array adapter y pasamos como tipo de dato tour
