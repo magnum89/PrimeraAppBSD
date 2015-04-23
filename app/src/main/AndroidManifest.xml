@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".OpcionesDeActividad"/>
+        <activity android:name=".TourDetalleActividad"/>
     </application>
 
 </manifest>

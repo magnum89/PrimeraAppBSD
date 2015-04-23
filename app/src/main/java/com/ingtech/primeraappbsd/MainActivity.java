@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
 import com.ingtech.primeraappbsd.database.PrimeraOpenHelper;
@@ -109,12 +110,34 @@ public class MainActivity extends ListActivity {
 
     }
 
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {//este metodo es llamado cuando el usuario selecciona
+        super.onListItemClick(l, v, position, id);//un elemento de la lista
+
+        //obtener una referencia del que se selecciono
+        Tour tour = tours.get(position);//de esta forma me retornara en q posicion estaba el tour
+        Intent intent = new Intent(this,TourDetalleActividad.class);
+        //intent.putExtra("TourID", tour.getId());//para evitar esto tocaria modificar el objeto tour principal
+        intent.putExtra(".buscadortour.modelo.tour",tour);//para transformar la clase tour
+        startActivity(intent);
+    }
 
     public void RefrescarPantalla() {
-        //metodo de refrescar pantalla en cualquier parte de mi metodo principal
-        ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this,android.R.layout.simple_list_item_1,tours);
-        setListAdapter(adapter);
 
+        boolean verImagen = opciones.getBoolean(VERIMAGENES,false);
+
+        if(verImagen) {
+            //mostrare el texto de la nueva forma
+            ArrayAdapter<Tour> adapter = new TourListAdapter(this,tours);
+            setListAdapter(adapter);
+
+        }
+        else {
+
+            //metodo de refrescar pantalla en cualquier parte de mi metodo principal
+            ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this, android.R.layout.simple_list_item_1, tours);
+            setListAdapter(adapter);
+        }
     }
 
     public void CrearArchivo (View v) throws IOException, JSONException {
@@ -200,7 +223,7 @@ public class MainActivity extends ListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -208,6 +231,14 @@ public class MainActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.menu_settings:
+
+                Intent intent = new Intent(this, OpcionesDeActividad.class);
+                startActivity(intent);
+                break;
+
+
             case R.id.menu_todo:
 
                 tours = DataSource.encontrarTodos();
@@ -284,4 +315,6 @@ public class MainActivity extends ListActivity {
     }
 
 }
+
+
 
