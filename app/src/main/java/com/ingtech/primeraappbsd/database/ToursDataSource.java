@@ -67,31 +67,47 @@ public class ToursDataSource {
 
     }
 
-    //crear metodo
-    public List<Tour> encontrarTodos(){//buscar todas nuestras filas y todas las columnas en la base de datos
-    //retornara una lista con el tipo de data siendo tour
-        List<Tour> tours = new ArrayList<Tour>();
 
-        Cursor cursor = baseDatos.query(PrimeraOpenHelper.TABLA_TOURS,todasColumnas,null,null,null,null,null);//objeto cursor con el cual
-        //se haran todas las peticiones a la base de datos
+    public List<Tour> encontrarTodos(){
+
+
+        Cursor cursor = baseDatos.query(PrimeraOpenHelper.TABLA_TOURS,todasColumnas,null,null,null,null,null);
+
         Log.i(LOGTAG," Contiene: " + cursor.getCount() + " Filas ");
 
-        while(cursor.moveToNext())//para hacer todas las peticiones a cada una de las filas y almacenar todas las columnas
-        {//retornara un valor verdadero siempre y cuando el cursor tenga un valor por delante
+        List<Tour> tours = cursorALista(cursor);
 
+        return tours;
+    }
+
+    public List<Tour> encontrarFiltrados(String filtrado, String ordenado){
+
+
+        Cursor cursor = baseDatos.query(PrimeraOpenHelper.TABLA_TOURS,todasColumnas,filtrado,null,null,null,ordenado);
+
+        Log.i(LOGTAG," Contiene: " + cursor.getCount() + " Filas ");
+
+        List<Tour> tours = cursorALista(cursor);
+
+        return tours;
+    }
+
+    private List<Tour> cursorALista(Cursor cursor) {//porque voy a usar en dos metodos
+        List<Tour> tours = new ArrayList<Tour>();
+        while(cursor.moveToNext())
+        {
             Tour tour = new Tour();
-            //pedir los valores de cada una de las columnas respectivamente
+
             tour.setId(cursor.getLong(cursor.getColumnIndex(PrimeraOpenHelper.COLUMNA_ID)));
             tour.setTitulo(cursor.getString(cursor.getColumnIndex(PrimeraOpenHelper.COLUMNA_TITULO)));
             tour.setDescripcion(cursor.getString(cursor.getColumnIndex(PrimeraOpenHelper.COLUMNA_DESC)));
             tour.setPrecio(cursor.getInt(cursor.getColumnIndex(PrimeraOpenHelper.COLUMNA_PRECIO)));
             tour.setImagen(cursor.getString(cursor.getColumnIndex(PrimeraOpenHelper.COLUMNA_IMAGEN)));
 
-            //agregar esos valores de tour en el objeto tours
+
             tours.add(tour);
 
         }
-
         return tours;
     }
 

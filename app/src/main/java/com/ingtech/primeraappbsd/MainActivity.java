@@ -52,6 +52,8 @@ public class MainActivity extends ListActivity {
 
     ToursDataSource DataSource;
 
+    private List<Tour> tours;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-                MainActivity.this.RefrescarPantalla(null);
+                MainActivity.this.RefrescarPantalla();
 
             }
         };
@@ -85,7 +87,7 @@ public class MainActivity extends ListActivity {
         DataSource = new ToursDataSource(this);
         DataSource.abrir();//aseguramos que esta abierta
 
-        List<Tour> tours = DataSource.encontrarTodos();
+        tours = DataSource.encontrarTodos();
 
         if(tours.size() == 0 )//significa q no tengo ninguna base de datos
         {
@@ -93,10 +95,9 @@ public class MainActivity extends ListActivity {
             tours = DataSource.encontrarTodos();
         }
 
+        RefrescarPantalla();
 
-        //creamos un array adapter y pasamos como tipo de dato tour
-        ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this,android.R.layout.simple_list_item_1,tours);
-        setListAdapter(adapter);
+
 
     }
 
@@ -109,12 +110,10 @@ public class MainActivity extends ListActivity {
     }
 
 
-    public void RefrescarPantalla(View v) {
-        Log.i(LOGTAG, "Boton de mostrar clicado");
-
-        //String ValorString = opciones.getString(NOMBREUSUARIO,"No Encontrado");
-        //AyudaIU.displayText(this,R.id.textView01,ValorString);//mostrar el texto q ha sido guardado
-        //AyudaIU.setCBChecked(this,R.id.checkBox01,opciones.getBoolean(VERIMAGENES,false));
+    public void RefrescarPantalla() {
+        //metodo de refrescar pantalla en cualquier parte de mi metodo principal
+        ArrayAdapter<Tour> adapter = new ArrayAdapter<Tour>(this,android.R.layout.simple_list_item_1,tours);
+        setListAdapter(adapter);
 
     }
 
@@ -208,16 +207,28 @@ public class MainActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.menu_todo:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                tours = DataSource.encontrarTodos();
+                RefrescarPantalla();
+                break;
+
+            case R.id.menu_barato:
+
+                tours = DataSource.encontrarFiltrados("precio <=500","precio ASC");
+                RefrescarPantalla();
+                break;
+
+            case R.id.menu_lujoso:
+
+                tours = DataSource.encontrarFiltrados("precio >=900","precio DESC");
+                RefrescarPantalla();
+                break;
+
+            default:
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
