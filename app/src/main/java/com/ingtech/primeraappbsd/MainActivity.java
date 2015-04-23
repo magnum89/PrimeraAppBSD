@@ -260,30 +260,15 @@ public class MainActivity extends ListActivity {
 
     private void CrearDatos(){
 
-        Tour tour = new Tour();
+        //ahora la haremos desde el archivo xml
+        ToursJDOMParser parser = new ToursJDOMParser();
+        List<Tour> tours = parser.parseXML(this);//usaremos parser
 
-        tour.setTitulo("Ciudad de Neiva");
-        tour.setDescripcion("Tour a la ciudad de Neiva");
-        tour.setPrecio(5000);
-        tour.setImagen("ciudad_neiva");
-        tour = DataSource.crear(tour);
-        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
+        for (Tour tour : tours) {
 
-        tour.setTitulo("Ciudad de Bogota");
-        tour.setDescripcion("Tour a la ciudad de Bogota");
-        tour.setPrecio(20000);
-        tour.setImagen("ciudad_bogota");
-        tour = DataSource.crear(tour);
-        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
+            DataSource.crear(tour);
 
-        tour.setTitulo("Ciudad de Pitalito");
-        tour.setDescripcion("Tour a la ciudad de Pitalito");
-        tour.setPrecio(15000);
-        tour.setImagen("ciudad_pitalito");
-        tour = DataSource.crear(tour);
-        Log.i(LOGTAG,"El valor del ID ingresado es:" + tour.getId());
-
-
+        }
 
     }
 

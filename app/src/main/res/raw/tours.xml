@@ -54,5 +54,28 @@
     <imagen>map_paloquemao</imagen>
     <link>http://www.TourSc.org/tour.php?id=1</link>
   </tour>
+  <tour>
+     <tourId>2</tourId>
+     <tituloTour>Gran viaje a Neiva City</tituloTour>
+     <tituloPaquete>Palo Quemao - El Quino </tituloPaquete>
+     <Descripcion>Desayuno y traslado a Barinas donde nuestro gu�a nos estar� esperando, para conducirnos a trav�s de 92 km de carretera que separa Barinas con la comunidad de Palo Quemao, punto de partida de nuestra aventura. Al llegar a la Mucuposada Vista Hermosa tomaremos nuestro almuerzo. En la tarde visitaremos y conoceremos la vida de la Finca. Cena y Alojamiento en la Mucuposada Vista Hermosa.</Descripcion>
+     <precio>10000</precio>
+     <dificultad>Medium</dificultad>
+     <length>3</length>
+     <imagen>map_paloquemao</imagen>
+     <link>http://www.TourSc.org/tour.php?id=1</link>
+  </tour>
+  <tour>
+     <tourId>3</tourId>
+     <tituloTour>Gran viaje a San Agustin</tituloTour>
+     <tituloPaquete>Palo Quemao - El Quino </tituloPaquete>
+     <Descripcion>Desayuno y traslado a Barinas donde nuestro gu�a nos estar� esperando, para conducirnos a trav�s de 92 km de carretera que separa Barinas con la comunidad de Palo Quemao, punto de partida de nuestra aventura. Al llegar a la Mucuposada Vista Hermosa tomaremos nuestro almuerzo. En la tarde visitaremos y conoceremos la vida de la Finca. Cena y Alojamiento en la Mucuposada Vista Hermosa.</Descripcion>
+     <precio>40000</precio>
+     <dificultad>Medium</dificultad>
+     <length>3</length>
+     <imagen>map_paloquemao</imagen>
+     <link>http://www.TourSc.org/tour.php?id=1</link>
+    </tour>
+
   
 </tours>
