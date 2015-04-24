@@ -20,7 +20,7 @@ public class ToursDataSource {
     SQLiteDatabase baseDatos;
 
     //crear un vector de string
-    public static final String[] todasColumnas = {//me servira para definir todo los nombres de todas las columnas que se encuentran en la tabla
+    public static final String[] todasColumnas = {
 
         PrimeraOpenHelper.COLUMNA_ID,
         PrimeraOpenHelper.COLUMNA_TITULO,
@@ -118,6 +118,13 @@ public class ToursDataSource {
         values.put(PrimeraOpenHelper.COLUMNA_ID, tour.getId());
         long resultado = baseDatos.insert(PrimeraOpenHelper.TABLA_MISTOURS, null, values);
         return (resultado != -1);
+    }
+
+    public boolean removerMisTours(Tour tour){
+
+        String where = PrimeraOpenHelper.COLUMNA_ID + "=" + tour.getId();
+        int resultado = baseDatos.delete(PrimeraOpenHelper.TABLA_MISTOURS, where, null);
+        return (resultado==1);//borrara es un lista sino me dara cero
     }
 
     public List<Tour> encontrarMisTours() {

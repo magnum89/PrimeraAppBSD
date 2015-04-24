@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Switch;
+
 import android.widget.TextView;
 
 import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
@@ -18,6 +18,7 @@ public class TourDetalleActividad extends Activity {
 
     Tour tour;
     ToursDataSource datasource;
+    boolean sonMisTours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class TourDetalleActividad extends Activity {
 
         Bundle bun = getIntent().getExtras();//obtengo toda la informacion q envio desde la actividad principal
         tour = bun.getParcelable(".buscadortour.modelo.tour");
+        sonMisTours = bun.getBoolean("sonMisTours");
 
         refrescarPantalla();
         datasource = new ToursDataSource(this);
@@ -34,6 +36,12 @@ public class TourDetalleActividad extends Activity {
     public boolean onCreateOptionsMenu(Menu menu)//permite agregar botones al menu
     {
         getMenuInflater().inflate(R.menu.tour_detalle, menu);
+        // Muestra menu borrar si el elemento viene de mis tours
+        menu.findItem(R.id.menu_borrar).setVisible(sonMisTours);
+
+        // Muestra menu add si el elemento no viene de mis tours
+        menu.findItem(R.id.menu_add).setVisible(!sonMisTours);
+
         return true;
     }
 
@@ -50,9 +58,14 @@ public class TourDetalleActividad extends Activity {
 
                     Log.i(MainActivity.LOGTAG,"Este tour ya fue agregado");
                 }
-
             break;
 
+            case R.id.menu_borrar:
+                if (datasource.removerMisTours(tour)) {
+                    setResult(-1);//una fila menos
+                    finish();//esta cerrada y se regresa a la actividad anterior
+                }
+                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -50,6 +50,9 @@ public class MainActivity extends ListActivity {
     private File archivo;
     private static final String NOMBREARCHIVO = "datadejson";
 
+    public boolean sonMisTours;
+    private static final int TOUR_DETALLE_ACTIVIDAD = 1001;
+
 
     ToursDataSource DataSource;
 
@@ -90,6 +93,8 @@ public class MainActivity extends ListActivity {
 
         tours = DataSource.encontrarTodos();
 
+        sonMisTours=false;
+
         if(tours.size() == 0 )//significa q no tengo ninguna base de datos
         {
             CrearDatos();
@@ -119,7 +124,23 @@ public class MainActivity extends ListActivity {
         Intent intent = new Intent(this,TourDetalleActividad.class);
         //intent.putExtra("TourID", tour.getId());//para evitar esto tocaria modificar el objeto tour principal
         intent.putExtra(".buscadortour.modelo.tour",tour);//para transformar la clase tour
-        startActivity(intent);
+
+        intent.putExtra("sonMisTours", sonMisTours);
+
+        startActivityForResult(intent, TOUR_DETALLE_ACTIVIDAD);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == TOUR_DETALLE_ACTIVIDAD && resultCode == -1) {
+            //se ha borrado una fila exitosamente
+            DataSource.abrir();
+            tours = DataSource.encontrarMisTours();
+            RefrescarPantalla();
+            sonMisTours = true;
+        }
     }
 
     public void RefrescarPantalla() {
@@ -242,23 +263,28 @@ public class MainActivity extends ListActivity {
 
                 tours = DataSource.encontrarTodos();
                 RefrescarPantalla();
+                sonMisTours=false;
                 break;
 
             case R.id.menu_barato:
 
                 tours = DataSource.encontrarFiltrados("precio <=500","precio ASC");
                 RefrescarPantalla();
+                sonMisTours=false;
                 break;
 
             case R.id.menu_lujoso:
 
                 tours = DataSource.encontrarFiltrados("precio >=900","precio DESC");
                 RefrescarPantalla();
+                sonMisTours=false;
                 break;
 
             case R.id.menu_mistours:
                 tours = DataSource.encontrarMisTours();
                 RefrescarPantalla();
+                sonMisTours=true;
+                break;
 
             default:
                 break;

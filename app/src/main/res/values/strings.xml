@@ -8,6 +8,7 @@
     <string name="menu_barato">Barato</string>
     <string name="menu_lujoso">Lujoso</string>
     <string name="menu_add">Agregar a Mis Tours</string>
-    <string name="menu_mistours">Mis  Tours</string>
+    <string name="menu_mistours">Mis Tours</string>
+    <string name="menu_borrar">Borrar</string>
 
 </resources>

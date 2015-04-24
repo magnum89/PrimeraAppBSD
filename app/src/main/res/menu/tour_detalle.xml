@@ -7,4 +7,10 @@
         android:showAsAction="always"
         android:title="@string/menu_add"/>
 
+    <item
+        android:id="@+id/menu_borrar"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/menu_borrar"/>
+
 </menu>
