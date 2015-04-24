@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.ingtech.primeraappbsd.buscadortour.modelo.Tour;
+import com.ingtech.primeraappbsd.database.PrimeraOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class ToursDataSource {
         valores.put(PrimeraOpenHelper.COLUMNA_PRECIO, tour.getPrecio());
         valores.put(PrimeraOpenHelper.COLUMNA_IMAGEN, tour.getImagen());
 
-        long idInsertado = baseDatos.insert(PrimeraOpenHelper.TABLA_TOURS,null,valores);
-        tour.setId(idInsertado);
+        long idinsertado = baseDatos.insert(PrimeraOpenHelper.TABLA_TOURS,null,valores);
+        tour.setId(idinsertado);
 
         return tour;
 

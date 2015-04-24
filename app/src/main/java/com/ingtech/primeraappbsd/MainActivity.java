@@ -123,7 +123,7 @@ public class MainActivity extends ListActivity {
         Tour tour = tours.get(position);//de esta forma me retornara en q posicion estaba el tour
         Intent intent = new Intent(this,TourDetalleActividad.class);
         //intent.putExtra("TourID", tour.getId());//para evitar esto tocaria modificar el objeto tour principal
-        intent.putExtra(".buscadortour.modelo.tour",tour);//para transformar la clase tour
+        intent.putExtra(".buscadortour.modelo.Tour",tour);//para transformar la clase tour
 
         intent.putExtra("sonMisTours", sonMisTours);
 

@@ -26,7 +26,7 @@ public class TourDetalleActividad extends Activity {
         setContentView(R.layout.tour_detalle);
 
         Bundle bun = getIntent().getExtras();//obtengo toda la informacion q envio desde la actividad principal
-        tour = bun.getParcelable(".buscadortour.modelo.tour");
+        tour = bun.getParcelable(".buscadortour.modelo.Tour");
         sonMisTours = bun.getBoolean("sonMisTours");
 
         refrescarPantalla();
