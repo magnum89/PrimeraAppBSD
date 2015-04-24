@@ -15,7 +15,7 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     private static final String LOGTAG = "TOURSC";
 
     private static final String DATABASE_NAME = "tours.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     public static final String TABLA_TOURS= "tours";
     public static final String COLUMNA_ID = "tourId";
@@ -33,6 +33,11 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
                     COLUMNA_PRECIO + " NUMERIC " +
                     ")";
 
+    public static final String TABLA_MISTOURS = "mistours";
+    private static final String CREAR_TABLA_MISTOURS =
+            "CREATE TABLE " + TABLA_MISTOURS + " (" +
+                    COLUMNA_ID + " INTEGER PRIMARY KEY)";//agregando id manualmente
+
 
 
     public PrimeraOpenHelper(Context context) {
@@ -44,7 +49,8 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
 
             Log.i(LOGTAG, "antes de crear");
             db.execSQL(CREAR_TABLA);
-            Log.i(LOGTAG, "La tabla se creo");
+            db.execSQL(CREAR_TABLA_MISTOURS);
+            Log.i(LOGTAG, "La tabla 2 se creo");
 
 
     }
@@ -53,7 +59,8 @@ public class PrimeraOpenHelper extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i(LOGTAG,"dentro de onUpgrade");
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_TOURS);//cosas q hay q revisar bien "DROP TABLE IF EXISTS "
-        Log.i(LOGTAG,"despues de drop");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_MISTOURS);
+        Log.i(LOGTAG,"despues del 2 drop");
         onCreate(db);
         Log.i(LOGTAG,"borrado");
 

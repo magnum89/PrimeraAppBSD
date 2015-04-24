@@ -238,7 +238,6 @@ public class MainActivity extends ListActivity {
                 startActivity(intent);
                 break;
 
-
             case R.id.menu_todo:
 
                 tours = DataSource.encontrarTodos();
@@ -256,6 +255,10 @@ public class MainActivity extends ListActivity {
                 tours = DataSource.encontrarFiltrados("precio >=900","precio DESC");
                 RefrescarPantalla();
                 break;
+
+            case R.id.menu_mistours:
+                tours = DataSource.encontrarMisTours();
+                RefrescarPantalla();
 
             default:
                 break;

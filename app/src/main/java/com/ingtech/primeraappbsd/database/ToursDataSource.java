@@ -111,4 +111,26 @@ public class ToursDataSource {
         return tours;
     }
 
+    //añadir filas a la nueva tabla
+
+    public boolean añadirMisTours(Tour tour) {
+        ContentValues values = new ContentValues();
+        values.put(PrimeraOpenHelper.COLUMNA_ID, tour.getId());
+        long resultado = baseDatos.insert(PrimeraOpenHelper.TABLA_MISTOURS, null, values);
+        return (resultado != -1);
+    }
+
+    public List<Tour> encontrarMisTours() {
+
+        String query = "SELECT tours.* FROM " +
+                "tours JOIN mistours ON " +
+                "tours.tourId = mistours.tourId";
+        Cursor cursor = baseDatos.rawQuery(query, null);
+
+        Log.i(LOGTAG, "Retornado  " + cursor.getCount() + " filas");
+
+        List<Tour> tours = cursorALista(cursor);
+        return tours;
+    }
+
 }
